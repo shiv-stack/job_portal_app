@@ -37,8 +37,8 @@ Future<void> init() async {
   // Repositories
   // Using MockAuthRepository for testing/demo purposes if backend is not configured
   sl.registerLazySingleton<AuthRepository>(
-    () => MockAuthRepository(), 
-    // () => AuthRepositoryImpl(remoteDataSource: sl()), // Uncomment for real backend
+    // () => MockAuthRepository(), 
+    () => AuthRepositoryImpl(remoteDataSource: sl()), // Uncomment for real backend
   );
 
   // BLoCs

@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/job.dart';
 import '../../../domain/repositories/job_repository.dart';
 
 import 'home_event.dart';
