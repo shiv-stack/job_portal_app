@@ -8,6 +8,9 @@ import 'core/routes/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/bloc/login/login_bloc.dart';
 import 'features/auth/presentation/bloc/signup/signup_bloc.dart';
+import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'features/auth/presentation/bloc/auth/auth_event.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +26,10 @@ class JobPortalApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => di.sl<LoginBloc>()),
+        BlocProvider(create: (_) => di.sl<LoginBloc>()),
         BlocProvider(create: (_) => di.sl<SignupBloc>()),
+        BlocProvider(create: (_) => di.sl<AuthBloc>()..add(AuthCheckRequested())),
+
       ],
       child: MaterialApp.router(
         title: 'Job Portal',

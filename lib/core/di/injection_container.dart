@@ -16,6 +16,8 @@ import '../../features/jobs/presentation/bloc/job_details/job_details_bloc.dart'
 import '../../features/preparation/data/repositories/preparation_repository_impl.dart';
 import '../../features/preparation/domain/repositories/preparation_repository.dart';
 import '../../features/preparation/presentation/bloc/preparation_bloc.dart';
+import '../../features/auth/presentation/bloc/auth/auth_bloc.dart';
+
 
 final sl = GetIt.instance;
 
@@ -61,4 +63,7 @@ Future<void> init() async {
     () => PreparationRepositoryImpl(),
   );
   sl.registerFactory(() => PreparationBloc(repository: sl()));
+
+  // Auth/Session
+  sl.registerFactory(() => AuthBloc(authRepository: sl()));
 }

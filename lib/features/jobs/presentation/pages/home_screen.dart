@@ -9,6 +9,9 @@ import '../bloc/home/home_bloc.dart';
 import '../bloc/home/home_event.dart';
 import '../bloc/home/home_state.dart';
 import '../widgets/job_card.dart';
+import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
+import '../../../auth/presentation/bloc/auth/auth_state.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -30,18 +33,26 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Hello, Guest', // ToDo: dynamic user name
-              style: AppTextStyles.bodyMedium,
-            ),
-             Text(
-              'Find your perfect job',
-              style: AppTextStyles.titleLarge,
-            ),
-          ],
+        title: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            String displayName = 'Guest';
+            if (state is AuthAuthenticated && state.user.email != null) {
+              displayName = state.user.email!.split('@').first;
+            }
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hello, $displayName',
+                  style: AppTextStyles.bodyMedium,
+                ),
+                Text(
+                  'Find your perfect job',
+                  style: AppTextStyles.titleLarge,
+                ),
+              ],
+            );
+          },
         ),
         actions: [
           IconButton(
@@ -54,9 +65,12 @@ class HomeView extends StatelessWidget {
             onPressed: () {},
           ),
           const SizedBox(width: 8),
-          const CircleAvatar(
-            backgroundColor: AppColors.primary,
-            child: Icon(Icons.person, color: Colors.white),
+          GestureDetector(
+            onTap: () => context.push('/profile'),
+            child: const CircleAvatar(
+              backgroundColor: AppColors.primary,
+              child: Icon(Icons.person, color: Colors.white),
+            ),
           ),
           const SizedBox(width: 16),
         ],

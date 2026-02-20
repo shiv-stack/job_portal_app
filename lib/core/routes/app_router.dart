@@ -7,7 +7,10 @@ import '../../features/jobs/domain/entities/job.dart';
 import '../../features/preparation/presentation/pages/preparation_dashboard.dart';
 import '../../features/preparation/presentation/pages/content_screen.dart';
 import '../../features/auth/presentation/pages/splash_screen.dart';
+import '../../features/auth/presentation/pages/splash_screen.dart';
+import '../../features/auth/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+
 
 // Placeholder Home Screen until we create the real one
 
@@ -26,6 +29,11 @@ final router = GoRouter(
       path: '/signup',
       builder: (context, state) => const SignupScreen(),
     ),
+    GoRoute(
+      path: '/profile',
+      builder: (context, state) => const ProfilePage(),
+    ),
+
     GoRoute(
       path: '/home',
       builder: (context, state) => const HomeScreen(),
